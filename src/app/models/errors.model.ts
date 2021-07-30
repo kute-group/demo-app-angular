@@ -1,3 +1,4 @@
-export interface Errors {
-  errors: {[key: string]: string};
+export interface Error {
+  type: string;
+  message: string;
 }

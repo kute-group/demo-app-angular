@@ -11,7 +11,7 @@ import {
 
 // import internal libs
 import { Currency } from '../models/currency.model';
-import { Errors } from '../models/errors.model';
+import { Error } from '../models/errors.model';
 
 @Component({
   selector: 'app-budget-form',
@@ -29,19 +29,20 @@ export class BudgetFormComponent implements OnInit, OnChanges {
 
   debitAmount: number;
   creditAmount: number;
-  error: any;
+  error: Error;
 
   constructor() {
     this.debitAmount = 0;
     this.creditAmount = 0;
-    this.error = {};
+    this.error = {
+      type: '',
+      message: '',
+    };
   }
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(333, changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   handleDebit(): void {
     if (this.debitAmount > 0) {
@@ -49,7 +50,10 @@ export class BudgetFormComponent implements OnInit, OnChanges {
       if (newAmount > 0) {
         this.onDebit.emit(this.debitAmount);
         this.debitAmount = 0;
-        this.error = {};
+        this.error = {
+          type: '',
+          message: '',
+        };
       } else {
         this.error = {
           type: 'debit',
@@ -60,8 +64,6 @@ export class BudgetFormComponent implements OnInit, OnChanges {
   }
 
   handleCredit(): void {
-    console.log(777, this.amount);
-
     if (this.creditAmount > 0) {
       this.onCredit.emit(this.creditAmount);
       this.creditAmount = 0;

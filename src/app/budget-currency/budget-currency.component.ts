@@ -29,8 +29,6 @@ export class BudgetCurrencyComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {}
 
   handleChange() {
-    console.log(444, this.selectedCurrency);
-
     this.onChangeCurrency.emit(this.selectedCurrency);
   }
 }
