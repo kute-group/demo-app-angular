@@ -1,0 +1,12 @@
+<div class="budget">
+    <h3 class="label">My budget:</h3>
+    <div [ngClass]="{
+      'budget-value': true,
+      'warning' : amount > 100 && amount <= 500,
+      'danger' : amount <= 100
+   }">
+        <span class="b-unit">{{selectedCurrency.symbol}}</span>
+        <span class="b-value">{{amount}}</span>
+    </div>
+</div>
+<!--.budget-->

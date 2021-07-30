@@ -1,0 +1,28 @@
+.budget {
+  background: #fff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  padding: 20px;
+  .label {
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  .budget-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #16a216;
+    &.danger {
+      color: #cd0707;
+    }
+    &.warning {
+      color: #ffa143;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .budget {
+    margin-bottom: 15px;
+  }
+}

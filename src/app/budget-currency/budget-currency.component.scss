@@ -1,0 +1,16 @@
+.currency {
+  text-align: left;
+}
+
+::ng-deep .dropdown-currency {
+  width: 90% !important;
+  margin-left: 10%;
+}
+
+
+@media screen and (max-width: 480px) { 
+  ::ng-deep .dropdown-currency {
+    width: 100% !important;
+    margin-left: 0%;
+  }
+}
