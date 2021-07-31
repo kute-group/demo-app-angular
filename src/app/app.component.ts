@@ -1,44 +1,31 @@
 // import external libs
 import { Component, Output, EventEmitter } from '@angular/core';
-
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 // import internal libs
-import { Currency } from './models/currency.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: [],
 })
 export class AppComponent {
   @Output() dismissButtonCallback?: EventEmitter<any> = new EventEmitter();
   amount: number;
-  currencies: Currency[];
-  selectedCurrency: Currency;
+  isHomePage: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
     this.amount = 1000;
-    this.currencies = [
-      { symbol: '$', code: 'US' },
-      { symbol: '£', code: 'UK' },
-    ];
-    this.selectedCurrency = {
-      symbol: '$',
-      code: 'US',
-    };
-  }
+    console.log(router.url);
+    this.isHomePage = false
 
-  onChangeCurrency(currency: Currency): void {
-    this.selectedCurrency = currency;
-  }
-
-  onDebit(debitAmount: number): void {
-    const newAmount = this.amount - debitAmount;
-    if (newAmount > 0) {
-      this.amount = this.amount - debitAmount;
-    }
-  }
-
-  onCredit(creditAmount: number): void {
-    this.amount = this.amount + creditAmount;
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          this.isHomePage = event.url === '/';
+          console.log('Current router', event);
+        }
+      });
   }
 }
