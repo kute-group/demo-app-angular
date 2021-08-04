@@ -19,7 +19,7 @@ export class CategoriesComponent implements OnInit {
       console.log('product detail', productsRes);
       this.loading = productsRes.loading;
       this.products = productsRes.products ? productsRes.products :  []
-    })
+    });
   }
 
 }

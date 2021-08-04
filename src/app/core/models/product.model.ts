@@ -15,3 +15,21 @@ export interface Product {
   status: string;
   author: Profile;
 }
+export interface ProductListConfig {
+  type?: string;
+  filters?: {
+    tag?: string,
+    author?: string,
+    favorited?: string,
+    limit?: number,
+    offset?: number
+  };
+}
+export interface ProductResponse {
+  product: Product;
+  loading: boolean;
+}
+export interface ProductsResponse {
+  products: Product[];
+  loading: boolean;
+}

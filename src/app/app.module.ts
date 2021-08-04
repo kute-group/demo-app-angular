@@ -16,6 +16,9 @@ import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ScrollTopModule} from 'primeng/scrolltop';
+
+
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -32,7 +35,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     TabViewModule,
     DropdownModule,
     InputTextModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ScrollTopModule
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent],

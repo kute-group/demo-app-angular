@@ -24,6 +24,7 @@ export class AppComponent {
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
           this.isHomePage = event.url === '/';
+          window.scrollTo(0, 0);
           console.log('Current router', event);
         }
       });

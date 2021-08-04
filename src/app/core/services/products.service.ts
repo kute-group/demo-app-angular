@@ -3,17 +3,13 @@ import { HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 
 import { ApiService } from './api.service';
-import { Product, ProductListConfig } from '../models';
+import {
+  Product,
+  ProductResponse,
+  ProductsResponse,
+  ProductListConfig,
+} from '../models';
 import { catchError, map } from 'rxjs/operators';
-
-interface ProductResponse {
-  product?: Product;
-  loading: boolean;
-}
-interface ProductsResponse {
-  products?: any;
-  loading: boolean;
-}
 
 @Injectable()
 export class ProductsService {
@@ -23,13 +19,14 @@ export class ProductsService {
   } as ProductResponse);
   products = new BehaviorSubject<ProductsResponse>({
     loading: false,
-    products: [],
+    products: [] as Product[],
   } as ProductsResponse);
   constructor(private apiService: ApiService) {}
 
-  query(config: ProductListConfig): Observable<any> {
+  query(config: ProductListConfig): Observable<ProductsResponse> {
     this.currentProduct.next({
       loading: true,
+      product: {} as Product,
     });
     const params = {};
 
@@ -56,15 +53,17 @@ export class ProductsService {
         catchError((err: any) => {
           this.products.next({
             loading: false,
+            products: [],
           });
           throw throwError(err);
         })
       );
   }
 
-  get(slug: string): Observable<any> {
+  get(slug: string): Observable<ProductResponse> {
     this.currentProduct.next({
       loading: true,
+      product: {} as Product,
     });
     return this.apiService.get('/api/product/' + slug).pipe(
       map((data) => {
@@ -79,6 +78,7 @@ export class ProductsService {
       catchError((err: any) => {
         this.currentProduct.next({
           loading: false,
+          product: {} as Product,
         });
         throw throwError(err);
       })
